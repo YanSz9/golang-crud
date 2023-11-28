@@ -8,8 +8,6 @@ type UserDomainInterface interface {
 
 	SetID(string)
 
-	GetJsonValue() (string, error)
-
 	EncryptPassword()
 }
 
