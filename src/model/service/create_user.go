@@ -1,8 +1,6 @@
 package service
 
 import (
-	"fmt"
-
 	"github.com/YanSz9/golang-crud/src/configuration/logger"
 	"github.com/YanSz9/golang-crud/src/configuration/rest_err"
 	"github.com/YanSz9/golang-crud/src/model"
@@ -11,13 +9,22 @@ import (
 
 func (ud *userDomainService) CreateUser(
 	userDomain model.UserDomainInterface,
-) *rest_err.RestErr {
+) (model.UserDomainInterface, *rest_err.RestErr) {
 
 	logger.Info("Init createUser model", zap.String("journey", "createUser"))
 
 	userDomain.EncryptPassword()
 
-	fmt.Println(userDomain.GetPassword())
-
-	return nil
+	userDomainRepository, err := ud.userRepository.CreateUser(userDomain)
+	if err != nil {
+		logger.Error("Error trying to call repository",
+			err,
+			zap.String("journey", "createUser"))
+		return nil, err
+	}
+	logger.Info(
+		"CreateUser service execute sucessfully",
+		zap.String("userId", userDomainRepository.GetID()),
+		zap.String("journey", "createUser"))
+	return userDomainRepository, nil
 }

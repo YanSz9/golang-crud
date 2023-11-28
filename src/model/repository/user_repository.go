@@ -8,7 +8,7 @@ import (
 
 func NewUserRepository(
 	database *mongo.Database,
-) userRepository {
+) UserRepository {
 	return &userRepository{
 		database,
 	}
