@@ -41,7 +41,7 @@ func (ur *userRepository) FindUserByEmail(
 				err,
 				zap.String("journey", "findUserByEmail"))
 
-			return nil, rest_err.NewNotFoundErorr(errorMessage)
+			return nil, rest_err.NewNotFoundError(errorMessage)
 		}
 		errorMessage := "Error trying to find user by email"
 		logger.Error(errorMessage,
@@ -84,7 +84,7 @@ func (ur *userRepository) FindUserByID(
 				err,
 				zap.String("journey", "findUserByID"))
 
-			return nil, rest_err.NewNotFoundErorr(errorMessage)
+			return nil, rest_err.NewNotFoundError(errorMessage)
 		}
 		errorMessage := "Error trying to find user by ID"
 		logger.Error(errorMessage,

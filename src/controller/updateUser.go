@@ -30,7 +30,7 @@ func (uc *userControllerInterface) UpdateUser(c *gin.Context) {
 
 	userId := c.Param("userId")
 	if _, err := primitive.ObjectIDFromHex(userId); err != nil {
-		errRest := rest_err.NewBadResquestError("Invalid userId, must be a hex value")
+		errRest := rest_err.NewBadRequestError("Invalid userId, must be a hex value")
 		c.JSON(errRest.Code, errRest)
 	}
 

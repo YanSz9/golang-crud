@@ -15,9 +15,11 @@ import (
 )
 
 func (uc *userControllerInterface) FindUserById(c *gin.Context) {
-	logger.Info("Init findUserById controller",
-		zap.String("journey", "findUserById"),
+	logger.Info("Init findUserByID controller",
+		zap.String("journey", "findUserByID"),
 	)
+
+	userId := c.Param("userId")
 
 	user, err := model.VerifyToken(c.Request.Header.Get("Authorization"))
 	if err != nil {
@@ -27,40 +29,42 @@ func (uc *userControllerInterface) FindUserById(c *gin.Context) {
 
 	logger.Info(fmt.Sprintf("User authenticated: %#v", user))
 
-	userId := c.Param("userId")
-
 	if _, err := primitive.ObjectIDFromHex(userId); err != nil {
 		logger.Error("Error trying to validate userId",
 			err,
-			zap.String("journey", "findUserById"),
+			zap.String("journey", "findUserByID"),
 		)
-		errorMessage := rest_err.NewBadResquestError(
-			"UserId is not a valid id",
+		errorMessage := rest_err.NewBadRequestError(
+			"UserID is not a valid id",
 		)
+
 		c.JSON(errorMessage.Code, errorMessage)
 		return
 	}
+
 	userDomain, err := uc.service.FindUserByIDServices(userId)
 	if err != nil {
-		logger.Error("Error trying to call findUserByIDServices",
+		logger.Error("Error trying to call findUserByID services",
 			err,
-			zap.String("journey", "findUserById"),
+			zap.String("journey", "findUserByID"),
 		)
 		c.JSON(err.Code, err)
 		return
 	}
+
+	logger.Info("FindUserByID controller executed successfully",
+		zap.String("journey", "findUserByID"),
+	)
 	c.JSON(http.StatusOK, view.ConvertDomainToResponse(
 		userDomain,
 	))
-	logger.Info("FindUserById controller executed sucessfully",
-		zap.String("journey", "findUserById"),
-	)
 }
 
 func (uc *userControllerInterface) FindUserByEmail(c *gin.Context) {
 	logger.Info("Init findUserByEmail controller",
 		zap.String("journey", "findUserByEmail"),
 	)
+
 	user, err := model.VerifyToken(c.Request.Header.Get("Authorization"))
 	if err != nil {
 		c.JSON(err.Code, err)
@@ -76,22 +80,25 @@ func (uc *userControllerInterface) FindUserByEmail(c *gin.Context) {
 			err,
 			zap.String("journey", "findUserByEmail"),
 		)
-		errorMessage := rest_err.NewBadResquestError(
-			"UserEmail is not valid email",
+		errorMessage := rest_err.NewBadRequestError(
+			"UserEmail is not a valid email",
 		)
+
 		c.JSON(errorMessage.Code, errorMessage)
 		return
 	}
+
 	userDomain, err := uc.service.FindUserByEmailServices(userEmail)
 	if err != nil {
-		logger.Error("Error trying to call findUserByEmailServices",
+		logger.Error("Error trying to call findUserByEmail services",
 			err,
 			zap.String("journey", "findUserByEmail"),
 		)
 		c.JSON(err.Code, err)
 		return
 	}
-	logger.Info("FindUserByEmail controller executed sucessfully",
+
+	logger.Info("findUserByEmail controller executed successfully",
 		zap.String("journey", "findUserByEmail"),
 	)
 	c.JSON(http.StatusOK, view.ConvertDomainToResponse(

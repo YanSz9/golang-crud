@@ -8,9 +8,14 @@ type RestErr struct {
 	Code    int      `json:"code"`
 	Causes  []Causes `json:"causes"`
 }
+
 type Causes struct {
 	Field   string `json:"field"`
 	Message string `json:"message"`
+}
+
+func (r *RestErr) Error() string {
+	return r.Message
 }
 
 func NewRestErr(message, err string, code int, causes []Causes) *RestErr {
@@ -22,11 +27,7 @@ func NewRestErr(message, err string, code int, causes []Causes) *RestErr {
 	}
 }
 
-func (r *RestErr) Error() string {
-	return r.Message
-}
-
-func NewBadResquestError(message string) *RestErr {
+func NewBadRequestError(message string) *RestErr {
 	return &RestErr{
 		Message: message,
 		Err:     "bad_request",
@@ -34,7 +35,15 @@ func NewBadResquestError(message string) *RestErr {
 	}
 }
 
-func NewBadResquestValidationError(message string, causes []Causes) *RestErr {
+func NewUnauthorizedRequestError(message string) *RestErr {
+	return &RestErr{
+		Message: message,
+		Err:     "unauthorized",
+		Code:    http.StatusUnauthorized,
+	}
+}
+
+func NewBadRequestValidationError(message string, causes []Causes) *RestErr {
 	return &RestErr{
 		Message: message,
 		Err:     "bad_request",
@@ -46,12 +55,12 @@ func NewBadResquestValidationError(message string, causes []Causes) *RestErr {
 func NewInternalServerError(message string) *RestErr {
 	return &RestErr{
 		Message: message,
-		Err:     "internal_server_error ",
+		Err:     "internal_server_error",
 		Code:    http.StatusInternalServerError,
 	}
 }
 
-func NewNotFoundErorr(message string) *RestErr {
+func NewNotFoundError(message string) *RestErr {
 	return &RestErr{
 		Message: message,
 		Err:     "not_found",
@@ -64,13 +73,5 @@ func NewForbiddenError(message string) *RestErr {
 		Message: message,
 		Err:     "forbidden",
 		Code:    http.StatusForbidden,
-	}
-}
-
-func NewUnauthorizedRequestError(message string) *RestErr {
-	return &RestErr{
-		Message: message,
-		Err:     "unauthorized",
-		Code:    http.StatusUnauthorized,
 	}
 }

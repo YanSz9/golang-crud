@@ -23,7 +23,6 @@ type UserDomainService interface {
 	FindUserByIDServices(
 		id string,
 	) (model.UserDomainInterface, *rest_err.RestErr)
-
 	FindUserByEmailServices(
 		email string,
 	) (model.UserDomainInterface, *rest_err.RestErr)
