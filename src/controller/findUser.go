@@ -1,15 +1,12 @@
 package controller
 
 import (
-	"fmt"
 	"net/http"
 	"net/mail"
 
 	"github.com/YanSz9/golang-crud/src/configuration/logger"
 	"github.com/YanSz9/golang-crud/src/configuration/rest_err"
-	"github.com/YanSz9/golang-crud/src/model"
 	"github.com/YanSz9/golang-crud/src/view"
-
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.uber.org/zap"
@@ -21,14 +18,6 @@ func (uc *userControllerInterface) FindUserById(c *gin.Context) {
 	)
 
 	userId := c.Param("userId")
-
-	user, err := model.VerifyToken(c.Request.Header.Get("Authorization"))
-	if err != nil {
-		c.JSON(err.Code, err)
-		return
-	}
-
-	logger.Info(fmt.Sprintf("User authenticated: %#v", user))
 
 	if _, err := primitive.ObjectIDFromHex(userId); err != nil {
 		logger.Error("Error trying to validate userId",
@@ -65,14 +54,6 @@ func (uc *userControllerInterface) FindUserByEmail(c *gin.Context) {
 	logger.Info("Init findUserByEmail controller",
 		zap.String("journey", "findUserByEmail"),
 	)
-
-	user, err := model.VerifyToken(c.Request.Header.Get("Authorization"))
-	if err != nil {
-		c.JSON(err.Code, err)
-		return
-	}
-
-	logger.Info(fmt.Sprintf("User authenticated: %#v", user))
 
 	userEmail := c.Param("userEmail")
 
