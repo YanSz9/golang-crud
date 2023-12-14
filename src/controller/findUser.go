@@ -9,6 +9,7 @@ import (
 	"github.com/YanSz9/golang-crud/src/configuration/rest_err"
 	"github.com/YanSz9/golang-crud/src/model"
 	"github.com/YanSz9/golang-crud/src/view"
+
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.uber.org/zap"

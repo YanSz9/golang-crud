@@ -16,10 +16,10 @@ func (ud *userDomainService) CreateUserServices(
 
 	user, _ := ud.FindUserByEmailServices(userDomain.GetEmail())
 	if user != nil {
-		return nil, rest_err.NewBadRequestError("Email is already registered in another acount")
+		return nil, rest_err.NewBadRequestError("Email is already registered in another account")
 	}
-	userDomain.EncryptPassword()
 
+	userDomain.EncryptPassword()
 	userDomainRepository, err := ud.userRepository.CreateUser(userDomain)
 	if err != nil {
 		logger.Error("Error trying to call repository",

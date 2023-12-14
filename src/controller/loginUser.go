@@ -37,7 +37,7 @@ func (uc *userControllerInterface) LoginUser(c *gin.Context) {
 			"Error trying to call loginUser service",
 			err,
 			zap.String("journey", "loginUser"))
-	c.JSON(err.Code, err)
+		c.JSON(err.Code, err)
 		return
 	}
 

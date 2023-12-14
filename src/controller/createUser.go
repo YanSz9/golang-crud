@@ -43,7 +43,8 @@ func (uc *userControllerInterface) CreateUser(c *gin.Context) {
 		return
 	}
 
-	logger.Info("User created successfully",
+	logger.Info(
+		"CreateUser controller executed successfully",
 		zap.String("userId", domainResult.GetID()),
 		zap.String("journey", "createUser"))
 

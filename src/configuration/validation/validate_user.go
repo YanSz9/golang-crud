@@ -44,8 +44,10 @@ func ValidateUserError(
 				Message: e.Translate(transl),
 				Field:   e.Field(),
 			}
+
 			errorsCauses = append(errorsCauses, cause)
 		}
+
 		return rest_err.NewBadRequestValidationError("Some fields are invalid", errorsCauses)
 	} else {
 		return rest_err.NewBadRequestError("Error trying to convert fields")
