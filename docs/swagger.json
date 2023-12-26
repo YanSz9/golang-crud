@@ -5,7 +5,7 @@
     "swagger": "2.0",
     "info": {
         "description": "API for crud operations on users",
-        "title": "Meu Primeiro CRUD em Go | HunCoding",
+        "title": "Golang-Crud | Yan Corrêa",
         "contact": {},
         "version": "1.0"
     },

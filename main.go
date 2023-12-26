@@ -12,7 +12,7 @@ import (
 	"github.com/joho/godotenv"
 )
 
-// @title Meu Primeiro CRUD em Go | HunCoding
+// @title Golang-Crud| Yan Corrêa
 // @version 1.0
 // @description API for crud operations on users
 // @host localhost:8080
