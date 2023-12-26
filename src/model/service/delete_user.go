@@ -8,6 +8,7 @@ import (
 
 func (ud *userDomainService) DeleteUser(
 	userId string) *rest_err.RestErr {
+
 	logger.Info("Init deleteUser model.",
 		zap.String("journey", "deleteUser"))
 
