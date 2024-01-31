@@ -53,7 +53,7 @@ The application will be accessible at `http://localhost:8080`.
 
 If you prefer, after running the project, visit: http://localhost:8080/swagger/index.html# to see and test all the route contracts.
 
-The MeuPrimeiroCRUD em Go application offers REST endpoints for creating, listing, updating, and deleting users. You can use tools like [curl](https://curl.se/) or [Postman](https://www.postman.com/) to test the endpoints. Here are some `curl` command examples for testing the endpoints:
+The GolangCrud application offers REST endpoints for creating, listing, updating, and deleting users. You can use tools like [curl](https://curl.se/) or [Postman](https://www.postman.com/) to test the endpoints. Here are some `curl` command examples for testing the endpoints:
 
 - **Create a user:**
 
