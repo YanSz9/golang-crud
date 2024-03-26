@@ -22,7 +22,7 @@ Follow the steps below to install the project in your development environment:
 1. **Clone the repository:**
 
    ```
-   git clone https://github.com/HunCoding/golang-crud.git
+   git clone https://github.com/YanSz9/golang-crud
    ```
 
 2. **Navigate to the project directory:**
